@@ -1,4 +1,6 @@
 
+#api spark 
+
 from pyspark.sql import SparkSession
 
 
@@ -27,4 +29,23 @@ join_dataset = spark.sql("""
 join_dataset.show()
 
 
+#pandas developer
+#arrow is an eginer in memory
+builder = SparkSession.Builder.appName("APP")
+builder = builder.config("spark.sql.excetution.arrow.pyspark.enabled","true")
+builder.getOrCreate()
+print(builder)
+#panda on spark
+import pyspark.pandas as ps #Use Spark's distributed computing executors.
+#import pandas as ps #Do not use Spark's distributed computing executors
+
+#read files
+
+get_device = ps.read_json("/path of filies/*.json")
+
+print(get_device)
+
+get_device.info()
+
+get_device.spark.explain(mode="formatted") 
 
